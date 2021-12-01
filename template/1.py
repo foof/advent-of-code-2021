@@ -1,6 +1,6 @@
 
-def solve(input):
-    pass
+def solve(lines):
+    print(lines)
 
 
 if __name__ == "__main__":

@@ -3,7 +3,7 @@ from typing import List
 
 
 def solve(state: List[int]):
-    for day in range(80):
+    for _ in range(80):
         new_spawn_count = state.count(0)
         state = [fish-1 if fish > 0 else 6 for fish in state]
         for _ in range(new_spawn_count):

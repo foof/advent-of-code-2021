@@ -1,3 +1,4 @@
+from functools import reduce
 from typing import List
 
 opening_brackets = ["<", "(", "[", "{"]
@@ -24,12 +25,8 @@ def solve_line(line: str):
     return 'valid', None
 
 
-def calc_score(brackets) -> int:
-    score = 0
-    for bracket in reversed(brackets):
-        score *= 5
-        score += bracket_points[bracket]
-    return score
+def calc_score(brackets: List) -> int:
+    return reduce(lambda acc, x: acc*5 + bracket_points[x], reversed(brackets), 0)
 
 
 def solve(lines: List[str]) -> int:

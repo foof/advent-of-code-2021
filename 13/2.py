@@ -16,7 +16,7 @@ def print_paper(paper):
             if (x, y) in paper:
                 row += "#"
             else:
-                row += "."
+                row += " "
         print(row)
     return
 

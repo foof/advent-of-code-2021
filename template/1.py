@@ -1,6 +1,6 @@
 
 def solve(lines):
-    pass
+    return lines
 
 
 if __name__ == "__main__":

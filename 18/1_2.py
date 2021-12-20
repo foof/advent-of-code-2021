@@ -137,9 +137,6 @@ class Node:
         while type(node.right) != int:
             node = node.right
 
-        while type(node.right) != int:
-            node = node.right
-
         return node, 'right'
 
     def find_node_with_right_regular_number(self):
@@ -154,9 +151,6 @@ class Node:
         if type(node.right) == int:
             return node, 'right'
         node = node.right
-        while type(node.left) != int:
-            node = node.left
-
         while type(node.left) != int:
             node = node.left
 

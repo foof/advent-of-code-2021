@@ -54,6 +54,8 @@ class Node:
             node_to_explode = self.find_node_to_explode()
             node_to_split = self.find_node_to_split()
 
+        return self
+
     def split(self):
         if type(self.left) == int and self.left > 9:
             self.left = Node([self.left//2, math.ceil(self.left/2)])
@@ -162,41 +164,16 @@ class Node:
 
 def solve1(lines):
     node = None
-    left_node = Node(eval(lines[0]))
+    prev_node = Node(eval(lines[0]))
     for line in lines[1:]:
-        node = Node()
-        right_node = Node(eval(line))
-
-        node.set_left(left_node)
-        node.set_right(right_node)
-        node.reduce()
-
-        left_node = node
+        node = Node([prev_node, Node(eval(line))]).reduce()
+        prev_node = node
 
     return node.magnitude()
 
 
 def solve2(lines):
-    max_magnitude = 0
-
-    node = None
-    for line1 in lines:
-        for line2 in lines:
-            if line1 == line2:
-                continue
-
-            node1 = Node(eval(line1))
-            node2 = Node(eval(line2))
-
-            node = Node()
-            node.set_left(node1)
-            node.set_right(node2)
-
-            node.reduce()
-
-            max_magnitude = max(node.magnitude(), max_magnitude)
-
-    return max_magnitude
+    return max([Node([eval(line1), eval(line2)]).reduce().magnitude() for line1 in lines for line2 in lines if line1 != line2])
 
 
 if __name__ == "__main__":

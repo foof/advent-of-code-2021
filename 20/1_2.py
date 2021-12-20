@@ -1,20 +1,4 @@
 
-def print_image(image):
-    min_x, min_y, max_x, max_y = 0, 0, 0, 0
-    for point in image:
-        min_x = min(min_x, point[0])
-        min_y = min(min_y, point[1])
-        max_x = max(max_x, point[0])
-        max_y = max(max_y, point[1])
-
-    for y in range(min_y, max_y+1):
-        row = ""
-        for x in range(min_x, max_x+1):
-            row += image[(x, y)]
-        print(row)
-    return
-
-
 def solve(binary_map, image, steps):
     n_tuples = [(-1, -1), (0, -1), (1, -1), (-1, 0), (0, 0), (1, 0), (-1, 1), (0, 1), (1, 1)]
 
@@ -45,7 +29,6 @@ def solve(binary_map, image, steps):
                 if x >= min_x - 1 and x <= max_x + 1 and y >= min_y - 1 and y <= max_y + 1:
                     new_image[(x, y)] = binary_map[int(binary_num, 2)]
         image = new_image
-        print_image(print_image)
 
     return len([pixel for pixel in image.values() if pixel == '#'])
 
@@ -56,4 +39,4 @@ if __name__ == "__main__":
         binary_map = list(lines[0])
         image = {(x, y): pixel for y, line in enumerate(lines[2:]) for x, pixel in enumerate(line)}
         print(solve(binary_map, image, 2))
-        # print(solve(binary_map, image, 50))
+        print(solve(binary_map, image, 50))

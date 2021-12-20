@@ -23,7 +23,7 @@ def solve(start, end, nodes):
     def h(node):
         return abs(max_x-node[0]) + abs(max_y-node[0])
 
-    open_set = [(0, start[0], start[1])]
+    open_set = [(float(0), int(start[0]), int(start[1]))]
     heapq.heapify(open_set)
 
     came_from = {}

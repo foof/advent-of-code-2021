@@ -4,10 +4,10 @@ def solve(binary_map, image, steps):
 
     for step in range(steps):
         all_on = step % 2 != 0
-        min_x = min(x for x, y in image)
-        max_x = max(x for x, y in image)
-        min_y = min(y for x, y in image)
-        max_y = max(y for x, y in image)
+        min_x = min(x for x, _ in image)
+        max_x = max(x for x, _ in image)
+        min_y = min(y for _, y in image)
+        max_y = max(y for _, y in image)
 
         new_image = {}
         for x in range(min_x-2, max_x+2):
@@ -16,13 +16,7 @@ def solve(binary_map, image, steps):
                 for n_xy in n_tuples:
                     n = (x+n_xy[0], y+n_xy[1])
 
-                    if n not in image:
-                        if all_on:
-                            pixel = '#'
-                        else:
-                            pixel = '.'
-                    else:
-                        pixel = image[n]
+                    pixel = ('#' if all_on else '.') if n not in image else image[n]
 
                     binary_num += pixel
                 binary_num = binary_num.replace('.', '0').replace('#', '1')

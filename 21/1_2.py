@@ -1,7 +1,4 @@
 
-from functools import cache
-
-
 class DeterministicDie:
     def __init__(self):
         self.prev_roll = 0
@@ -54,8 +51,12 @@ def solve1(lines):
             return die.rolls * player1.score
 
 
-@cache
-def game(p1_pos, p2_pos, p1_score, p2_score):
+def game(p1_pos, p2_pos, p1_score, p2_score, dp):
+    initial_state = p1_pos, p2_pos, p1_score, p2_score
+
+    if initial_state in dp:
+        return dp[initial_state]
+
     if p1_score >= 21:
         return [1, 0]
     if p2_score >= 21:
@@ -68,14 +69,16 @@ def game(p1_pos, p2_pos, p1_score, p2_score):
             for k in range(1, 4):
                 new_p1_pos = (p1_pos + i + j + k - 1) % 10 + 1
                 new_p1_score = p1_score + new_p1_pos
-                sub_winners = game(p2_pos, new_p1_pos, p2_score, new_p1_score)
+                sub_winners = game(p2_pos, new_p1_pos, p2_score, new_p1_score, dp)
                 winners = [winners[0] + sub_winners[1], winners[1] + sub_winners[0]]
+
+    dp[initial_state] = winners
 
     return winners
 
 
 def solve2(lines):
-    print(max(game(int(lines[0].split(' ')[-1]), int(lines[1].split(' ')[-1]), 0, 0)))
+    return max(game(int(lines[0].split(' ')[-1]), int(lines[1].split(' ')[-1]), 0, 0, {}))
 
 
 if __name__ == "__main__":

@@ -64,6 +64,8 @@ def game(p1_pos, p2_pos, p1_score, p2_score, dp):
 
     winners = [0, 0]
 
+    # 3**3 = 27 universes per turn
+    # i+j+k = each unique outcome
     for i in range(1, 4):
         for j in range(1, 4):
             for k in range(1, 4):
